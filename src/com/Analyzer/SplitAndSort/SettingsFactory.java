@@ -1,4 +1,4 @@
-package com.KangDa.SplitAndSort;
+package com.Analyzer.SplitAndSort;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

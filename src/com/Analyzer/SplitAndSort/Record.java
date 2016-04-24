@@ -1,8 +1,8 @@
-package com.KangDa.SplitAndSort;
+package com.Analyzer.SplitAndSort;
 
 import java.util.List;
 
-/*¤@­Órowªº¸ê®Æ*/
+/*ï¿½@ï¿½ï¿½rowï¿½ï¿½ï¿½ï¿½ï¿½*/
 public class Record implements Comparable<Record>{
 	private Long id;
 	private List<String> list;

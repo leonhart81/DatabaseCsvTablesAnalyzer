@@ -1,4 +1,4 @@
-package com.KangDa.SplitAndSort;
+package com.Analyzer.SplitAndSort;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

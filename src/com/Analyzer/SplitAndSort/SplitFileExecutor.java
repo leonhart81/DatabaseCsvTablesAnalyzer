@@ -1,4 +1,4 @@
-package com.KangDa.SplitAndSort;
+package com.Analyzer.SplitAndSort;
 
 import java.util.ArrayList;
 import java.util.Date;

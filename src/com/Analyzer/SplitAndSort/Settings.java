@@ -1,4 +1,4 @@
-package com.KangDa.SplitAndSort;
+package com.Analyzer.SplitAndSort;
 
 public class Settings {
 	private String sourcePath;
