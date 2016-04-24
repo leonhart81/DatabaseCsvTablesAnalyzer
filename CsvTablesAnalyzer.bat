@@ -1,0 +1,1 @@
+java -jar CsvTablesAnalyzer.jar import.ini
