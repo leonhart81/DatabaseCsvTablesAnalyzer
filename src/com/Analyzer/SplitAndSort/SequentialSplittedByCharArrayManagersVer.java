@@ -277,6 +277,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 	    												lastToken = chunk.substring(start, endIndex);
 	    												if((tmpEndIndex = lastToken.lastIndexOf("\r\n")) != -1) {
 	    													datum = lastToken.substring(0, tmpEndIndex);
+	    													datum = validateDatum(datum);
 	    													errorList.add(datum);
 	    													start = start + tmpEndIndex + 2;
 	    													errors.add(new Record(errorList, settings.getHeadDelimiter(), settings.getTailDelimiter()));
@@ -867,7 +868,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 		StringBuilder sb = new StringBuilder(datum);
 		
 		for(int i=0;i<sb.length();i++) {
-			if(sb.charAt(i) == '\\' || sb.charAt(i) == '\"'){
+			if(sb.charAt(i) == '\\' || sb.charAt(i) == settings.getTailDelimiter()){
 				sb.insert(i, '\\');
 				i++;
 			}
