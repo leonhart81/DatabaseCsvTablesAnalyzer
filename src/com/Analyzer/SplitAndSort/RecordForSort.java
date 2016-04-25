@@ -2,14 +2,20 @@ package com.Analyzer.SplitAndSort;
 
 import java.util.List;
 
-/*�@��row�����*/
 public class RecordForSort implements Comparable<RecordForSort>{
 	private Long id;
 	private List<String> list;
 	
-	public RecordForSort(List<String> list2) {
+	public RecordForSort(List<String> list2, char headDelimiter, char tailDelimiter) {
 		this.list = list2;
-		id = Long.parseLong(list2.get(0).substring(1, list2.get(0).length() - 1));
+		if(headDelimiter != '\u0000' && tailDelimiter != '\u0000')
+			id = Long.parseLong(list2.get(0).substring(1, list2.get(0).length() - 1));
+		else if(headDelimiter == '\u0000' && tailDelimiter != '\u0000')
+			id = Long.parseLong(list2.get(0).substring(0, list2.get(0).length() - 1));
+		else if(headDelimiter != '\u0000' && tailDelimiter == '\u0000')
+			id = Long.parseLong(list2.get(0).substring(1));
+		else
+			id = Long.parseLong(list2.get(0));
 	}
 	
 	public StringBuilder toStringBuilder() {

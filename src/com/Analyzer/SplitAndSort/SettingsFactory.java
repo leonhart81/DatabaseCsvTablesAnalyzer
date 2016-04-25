@@ -57,10 +57,18 @@ public class SettingsFactory {
 						String property = line.substring(0, eq);
 						String value = line.substring(eq+1);
 						if(property.equals("headDelimiter")) {
-							headDelimiter = value.charAt(0);
+							try {
+								headDelimiter = value.charAt(0);
+							} catch (StringIndexOutOfBoundsException e) {
+								headDelimiter = '\u0000';
+							}
 						}
 						else if(property.equals("tailDelimiter")) {
-							tailDelimiter = value.charAt(0);
+							try {
+								tailDelimiter = value.charAt(0);
+							} catch (StringIndexOutOfBoundsException e) {
+								tailDelimiter = '\u0000';
+							}
 						}
 					}
 					else if(mode.equals("[SplitNumbers]")) {

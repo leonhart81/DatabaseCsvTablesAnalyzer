@@ -20,7 +20,11 @@ public class Record implements Comparable<Record>{
 		
 		StringBuilder record = new StringBuilder();
 		for(int i=0;i<list.size();i++) {
-			record.append(headDelimiter).append(list.get(i)).append(tailDelimiter);
+			if(headDelimiter != '\u0000')
+				record.append(headDelimiter);
+			record.append(list.get(i));
+			if(tailDelimiter != '\u0000')
+				record.append(tailDelimiter);
 			if(i != list.size() - 1)
 				record.append('\t');
 		}

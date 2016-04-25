@@ -509,7 +509,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 							}
 				    		try {
 				    			if(list.size() == colCnt)
-				    				recordsForSort.add(new RecordForSort(list));
+				    				recordsForSort.add(new RecordForSort(list, settings.getHeadDelimiter(), settings.getTailDelimiter()));
 				    		} catch(NumberFormatException e){
 				    			
 				    		}
