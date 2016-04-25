@@ -130,6 +130,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 									datum = lastToken.substring(++start);
 								}
 								start = endIndex + 1;
+								datum = validateDatum(datum);
 								list.add(datum);
 								
 								for(int i = list.size(); i < colCnt; i++) {
@@ -155,6 +156,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 													}
 													else {
 														if(!Character.isDigit(datum.charAt(0))) {
+															datum = validateDatum(datum);
 															errorList.add(datum);
 															errors.add(new Record(errorList, settings.getHeadDelimiter(), settings.getTailDelimiter()));
 															errorCondition = false;
@@ -178,6 +180,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 											start = start + lastToken.lastIndexOf("\r\n") + 2 ;
 										}
 									}
+									datum = validateDatum(datum);
 									list.add(datum);
 								}
 							}
@@ -193,6 +196,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 									datum = lastToken.substring(0, lastToken.lastIndexOf("\r\n"));
 									start = start + lastToken.lastIndexOf("\r\n") - tmp.length() + 2 ;
 								}
+								datum = validateDatum(datum);
 								list.add(datum);
 							}
 							tmp = null;
@@ -225,6 +229,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 													}
 													else {
 														if(!Character.isDigit(datum.charAt(0))) {
+															datum = validateDatum(datum);
 															errorList.add(datum);
 															errors.add(new Record(errorList, settings.getHeadDelimiter(), settings.getTailDelimiter()));
 															errorCondition = false;
@@ -244,10 +249,12 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 											datum = chunk.substring(start, endIndex); 
 											start = endIndex + 1;
 											if(start == chunk.length() - 1) {
+												datum = validateDatum(datum);
 												list.add(datum);
 												break;
 											}
 											else {
+												datum = validateDatum(datum);
 												list.add(datum);
 												tmp = chunk.substring(++start);
 												break;
@@ -282,6 +289,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 										}
 									}
 									if(!errorCondition) {
+										datum = validateDatum(datum);
 	    								list.add(datum);
 	    							}
 	    							else {
@@ -319,6 +327,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 													}
 													else {
 														if(!Character.isDigit(datum.charAt(0))) {
+															datum = validateDatum(datum);
 															errorList.add(datum);
 															errors.add(new Record(errorList, settings.getHeadDelimiter(), settings.getTailDelimiter()));
 															errorCondition = false;
@@ -338,6 +347,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 											datum = chunk.substring(start, endIndex); 
 											start = endIndex + 1;
 											if(start == chunk.length() - 1) {
+												datum = validateDatum(datum);
 												list.add(datum);
 												break;
 											}
@@ -349,6 +359,7 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 											start = start + lastToken.lastIndexOf("\r\n") + 2 ;
 										}
 									}
+									datum = validateDatum(datum);
 									list.add(datum);
 								}
 							}
@@ -849,5 +860,19 @@ public class SequentialSplittedByCharArrayManagersVer implements Runnable{
 	    		settings.setError(true);
 	    	}
 	    }
+	}
+	
+	private String validateDatum(String datum) {
+		
+		StringBuilder sb = new StringBuilder(datum);
+		
+		for(int i=0;i<sb.length();i++) {
+			if(sb.charAt(i) == '\\' || sb.charAt(i) == '\"'){
+				sb.insert(i, '\\');
+				i++;
+			}
+		}
+		
+		return sb.toString();
 	}
 }
