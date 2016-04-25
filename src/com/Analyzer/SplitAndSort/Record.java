@@ -2,7 +2,6 @@ package com.Analyzer.SplitAndSort;
 
 import java.util.List;
 
-/*�@��row�����*/
 public class Record implements Comparable<Record>{
 	private Long id;
 	private List<String> list;
